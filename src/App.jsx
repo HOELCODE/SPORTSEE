@@ -1,6 +1,6 @@
 import Navbar from './layout/Navbar';
 import Aside from './layout/Aside';
-import Main from './layout/Main';
+import AppRouter from './routes/Router';
 
 import './css/App.css';
 
@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <div className="container">
         <Aside />
-        <Main />
+        <AppRouter />
       </div>
 
     </div>
