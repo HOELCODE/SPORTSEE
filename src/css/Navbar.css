@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: #000;
+    color: white;
+}
+
+.nav {
+    width: 80%;
+}
+
+.nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #fff;
+}
+
+.nav ul li {
+    list-style: none;
+    font-size: 24px;
+    cursor: pointer;
+}
