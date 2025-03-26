@@ -4,7 +4,7 @@ import Dashboard from "../pages/Dashboard";
 const AppRouter = () => {
     return (
         <Routes>
-            <Route path="/test" element={<Dashboard />} />
+            <Route path="/:id" element={<Dashboard />} />
         </Routes>
     );
 };
