@@ -1,0 +1,40 @@
+.indicator {
+    background-color: #FBFBFB;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 30px;
+}
+
+.indicator-logo {
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.indicator-content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.indicator-content p {
+    font-size: 20px;
+    font-weight: 700;
+    color: #282D30;
+    margin: 0;
+}
+
+.indicator span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #74798C;
+}
