@@ -67,12 +67,6 @@ const Dashboard = () => {
           <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
 
           <div className="dashboard-content">
-            <div className="indicator-block">
-              <IndicatorBlock color="rgba(253, 81, 129, 0.1)" logo={energy} span="Calories" number={`${user.keyData.calorieCount}kCal`} />
-              <IndicatorBlock color="#4AB8FF1A" logo={chicken} span="Protéines" number={`${user.keyData.proteinCount}g`} />
-              <IndicatorBlock color="#FFF2CC" logo={apple} span="Glucides" number={`${user.keyData.carbohydrateCount}g`} />
-              <IndicatorBlock color="#FD51811A" logo={cheeseburger} span="Lipides" number={`${user.keyData.lipidCount}g`} />
-            </div>
             <div className="dashboard-left">
               <div className="activity-block">
                 {userActivity ? <Activity data={userActivity} /> : <p>Chargement des activités...</p>}
@@ -82,6 +76,12 @@ const Dashboard = () => {
                 <div className="intensity-block"></div>
                 <div className="score-block"></div>
               </div>
+            </div>
+            <div className="indicator-block">
+              <IndicatorBlock color="rgba(253, 81, 129, 0.1)" logo={energy} span="Calories" number={`${user.keyData.calorieCount}kCal`} />
+              <IndicatorBlock color="#4AB8FF1A" logo={chicken} span="Protéines" number={`${user.keyData.proteinCount}g`} />
+              <IndicatorBlock color="#FFF2CC" logo={apple} span="Glucides" number={`${user.keyData.carbohydrateCount}g`} />
+              <IndicatorBlock color="#FD51811A" logo={cheeseburger} span="Lipides" number={`${user.keyData.lipidCount}g`} />
             </div>
           </div>
         </>

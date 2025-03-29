@@ -28,7 +28,7 @@ const Activity = ({ data }) => {
     const xScale = d3.scaleBand()
       .domain(sortedData.map((_, i) => i + 1)) // 1,2,3...
       .range([margin.left, width - margin.right])
-      .padding(0.2);
+      .padding(0.65);
 
     const yScale = d3.scaleLinear()
       .domain([d3.min(sortedData, d => d.kilogram) - 2, d3.max(sortedData, d => d.kilogram)])
@@ -43,8 +43,8 @@ const Activity = ({ data }) => {
       .attr("x", (_, i) => xScale(i + 1))
       .attr("y", d => yScale(d.kilogram))
       .attr("height", d => height - margin.bottom - yScale(d.kilogram))
-      .attr("width", xScale.bandwidth() / 2)
-      .attr("fill", "#4A90E2");
+      .attr("width", "7px")
+      .attr("fill", "#282D30");
 
     // Ajouter les barres des calories
     svg.selectAll(".bar-calories")
@@ -52,11 +52,11 @@ const Activity = ({ data }) => {
       .enter()
       .append("rect")
       .attr("class", "bar-calories")
-      .attr("x", (_, i) => xScale(i + 1) + xScale.bandwidth() / 2)
+      .attr("x", (_, i) => xScale(i + 1) + 15)
       .attr("y", d => yScale(d.kilogram))
       .attr("height", d => height - margin.bottom - yScale(d.kilogram))
-      .attr("width", xScale.bandwidth() / 2)
-      .attr("fill", "#E24A4A");
+      .attr("width", "7px")
+      .attr("fill", "#E60000");
 
     // Ajouter l'axe X
     svg.append("g")
@@ -65,8 +65,9 @@ const Activity = ({ data }) => {
 
     // Ajouter l'axe Y
     svg.append("g")
-      .attr("transform", `translate(${margin.left},0)`)
-      .call(d3.axisLeft(yScale));
+      .attr("transform", `translate(${width - margin.right},0)`) // Déplace l'axe Y à droite
+      .call(d3.axisRight(yScale)); // Change la direction des ticks
+
 
   }, [data]);
 
