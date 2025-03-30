@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { fetchUserById, fetchUserActivity, fetchUserAverageSessions } from "../api/api.js";
+import { fetchUserById, fetchUserActivity, fetchUserAverageSessions, fetchUserPerformance } from "../api/api.js";
 import { useParams } from 'react-router-dom';
 
 // Composants
 import IndicatorBlock from '../components/Indicator.jsx';
 import Activity from '../components/Activity.jsx';
 import Duration from "../components/Duration.jsx";
+import Intensity from "../components/Intensity.jsx";
 
 // Images pour les blocs indicateurs
 import energy from '../assets/energy.svg';
@@ -26,6 +27,9 @@ const Dashboard = () => {
   // Duration 
   const [UserAverageSessions, setUserAverageSessions] = useState(null);
 
+  // Intensity
+  const [userPerformance, setUserPerformance] = useState(null);
+
   // ID
   const { id } = useParams();
 
@@ -36,10 +40,11 @@ const Dashboard = () => {
       try {
 
         // Exécuter les deux requêtes en parallèle
-        const [userResponse, activityResponse, durationResponse] = await Promise.all([
+        const [userResponse, activityResponse, durationResponse, PerformanceResponse] = await Promise.all([
           fetchUserById(id),
           fetchUserActivity(id),
           fetchUserAverageSessions(id),
+          fetchUserPerformance(id),
         ]);
 
         // récupération data user
@@ -60,7 +65,14 @@ const Dashboard = () => {
         if (durationResponse?.data?.sessions) {
           setUserAverageSessions(durationResponse.data.sessions);
         } else {
-          console.error("Données d'activité manquantes !");
+          console.error("Données de durée manquantes !");
+        } 
+
+        // récupération data performance
+        if (PerformanceResponse?.data?.data) {
+          setUserPerformance(PerformanceResponse.data.data);
+        } else {
+          console.error("Données de performance manquantes !");
         }
 
       } catch (error) {
@@ -88,6 +100,7 @@ const Dashboard = () => {
                   {UserAverageSessions ? <Duration data={UserAverageSessions} /> : <p>Chargement de la durée...</p>}
                 </div>
                 <div className="intensity-block"></div>
+                {userPerformance ? <Intensity data={userPerformance} /> : <p>Chargement de l'intensité...</p>}
                 <div className="score-block"></div>
               </div>
             </div>

@@ -22,7 +22,7 @@ const Activity = ({ data }) => {
     <div style={{ width: 700, height: 300 }}>
       <BarChart
         width={700}
-        height={300}
+        height={250}
         data={formattedData}
         margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
         barSize={7}
@@ -35,6 +35,8 @@ const Activity = ({ data }) => {
           tickLine={false}
           axisLine={false}
           dx={15}
+          domain={[0, 'dataMax']} 
+          tickCount={4}
         />
         <Tooltip
           formatter={(value, name) => {

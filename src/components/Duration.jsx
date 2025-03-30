@@ -29,7 +29,7 @@ const Duration = ({ data }) => {
       >
         <LineChart
           width={300} // Augmenter la largeur
-          height={270}
+          height={200}
           data={formattedData}
           margin={{
             top: 0,

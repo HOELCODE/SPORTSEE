@@ -41,3 +41,17 @@ export const fetchUserAverageSessions = async (id) => {
     return null;
   }
 };
+
+// Fonction pour récupérer les performances de l'utilisateur
+export const fetchUserPerformance = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/user/${id}/performance`);
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des données d'activité");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Erreur API:", error);
+    return null;
+  }
+};
