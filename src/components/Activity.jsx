@@ -10,22 +10,43 @@ const Activity = ({ data }) => {
   const formattedData = data.map((item, index) => ({
     ...item,
     day: index + 1,
+    kilogramAxe: item.kilogram,
+    CaloriesAxe: item.calories,
+    kilogramBarre: item.kilogram / 5,
+    caloriesBarre: item.calories / 8,
   }));
+  
 
+  // Affichage du graphique
   return (
     <div style={{ width: 700, height: 300 }}>
       <BarChart
         width={700}
         height={300}
         data={formattedData}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        margin={{ top: 5, right: 0, left: 0, bottom: 5 }}
+        barSize={7}
       >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="day" />
-        <YAxis />
-        <Tooltip />
-        <Bar dataKey="kilogram" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-        <Bar dataKey="calories" fill="#E60000" activeBar={<Rectangle fill="#E60000" stroke="purple" />} />
+        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+        <XAxis dataKey="day" tickLine={false} dy={15}/>
+        <YAxis
+          dataKey="kilogramAxe"
+          orientation="right"
+          tickLine={false}
+          axisLine={false}
+          dx={15}
+        />
+        <Tooltip
+          formatter={(value, name) => {
+            if (name === "kilogramBarre") return [<span style={{ color: '#fff' }}>{value * 5}kg</span>];
+            if (name === "caloriesBarre") return [<span style={{ color: '#fff' }}>{value * 8}kcal</span>];
+            return value;
+          }}
+          labelFormatter={() => ""} // Supprime l'affichage des jours
+          contentStyle={{ backgroundColor: '#E60000', color: '#fff' }} // Style du tooltip
+        />
+        <Bar dataKey="kilogramBarre" fill="#282D30" radius={[3, 3, 0, 0]} activeBar={<Rectangle dataKey="kilogramAxe" fill="#282D30" stroke="#C4C4C480" />} />
+        <Bar dataKey="caloriesBarre" fill="#E60000" radius={[3, 3, 0, 0]} activeBar={<Rectangle datakey="CaloriesAxe" fill="#E60000" stroke="#C4C4C480" />} />
       </BarChart>
     </div>
   );
