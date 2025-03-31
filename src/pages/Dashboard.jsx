@@ -29,6 +29,7 @@ const Dashboard = () => {
 
   // Intensity
   const [userPerformance, setUserPerformance] = useState(null);
+  const [performanceKind, setPerformanceKind] = useState(null);
 
   // ID
   const { id } = useParams();
@@ -71,8 +72,8 @@ const Dashboard = () => {
         // récupération data performance
         if (PerformanceResponse?.data?.data) {
           setUserPerformance(PerformanceResponse.data.data);
-        } else {
-          console.error("Données de performance manquantes !");
+        } if (PerformanceResponse?.data?.kind) {
+          setPerformanceKind(PerformanceResponse.data.kind);
         }
 
       } catch (error) {
@@ -99,8 +100,10 @@ const Dashboard = () => {
                 <div className="duration-block">
                   {UserAverageSessions ? <Duration data={UserAverageSessions} /> : <p>Chargement de la durée...</p>}
                 </div>
-                <div className="intensity-block"></div>
-                {userPerformance ? <Intensity data={userPerformance} /> : <p>Chargement de l'intensité...</p>}
+                <div className="intensity-block">
+                {userPerformance ? <Intensity data={userPerformance} kind={performanceKind} /> : <p>Chargement de l'intensité...</p>}
+                </div>
+                
                 <div className="score-block"></div>
               </div>
             </div>

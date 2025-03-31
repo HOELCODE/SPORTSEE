@@ -1,39 +1,34 @@
 import React from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+import '../css/Intensity.css';
+const Intensity = ({ data, kind }) => {
 
-const Intensity = ({ data }) => {
-    const kindMapping = {
-      1: 'Cardio',
-      2: 'Énergie',
-      3: 'Endurance',
-      4: 'Force',
-      5: 'Vitesse',
-      6: 'Intensité'
-    };
-  
-    // Transformation des données
-    const formattedData = data.map(item => ({
-      subject: kindMapping[item.kind], // Remplace `kind` par le bon libellé
-      value: item.value, // Garde la valeur
-    }));
-  
-    return (
-      <ResponsiveContainer width="100%" height={400}>
-        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={formattedData}>
-          <PolarGrid />
-          <PolarAngleAxis dataKey="subject" stroke="white" tick={{ fontSize: 12 }} />
-          <PolarRadiusAxis tick={false} />
-          <Radar 
-            name="Performance" 
-            dataKey="value" 
-            stroke="#FF0101" 
-            fill="#FF0101" 
-            fillOpacity={0.6} 
-          />
-        </RadarChart>
-      </ResponsiveContainer>
-    );
-  };
-  
-  export default Intensity;
-  
+  const kindMapping = kind; // Assurez-vous que `kind` est bien un objet
+
+  // Transformation des données
+  const formattedData = data.map(item => ({
+    subject: kindMapping[item.kind], // Ajoute "Kinmapping" devant le libellé
+    value: item.value,
+  }));
+
+  return (
+    <div className='intensity-container'>
+    <ResponsiveContainer width={350} height={300}>
+      <RadarChart cx="50%" cy="50%" outerRadius="80%" data={formattedData}>
+        <PolarGrid gridType="polygon" radialLines={false} />
+        <PolarAngleAxis dataKey="subject" stroke="#fff" tick={{ fontSize: 12 }} tickLine={false} />
+        <PolarRadiusAxis tick={false} axisLine={false} />
+        <Radar
+          name="Performance"
+          dataKey="value"
+          stroke="#FF0101B2"
+          fill="#FF0101B2"
+          fillOpacity={1}
+        />
+      </RadarChart>
+    </ResponsiveContainer>
+    </div>
+  );
+};
+
+export default Intensity;
