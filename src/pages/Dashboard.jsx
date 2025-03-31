@@ -7,6 +7,7 @@ import IndicatorBlock from '../components/Indicator.jsx';
 import Activity from '../components/Activity.jsx';
 import Duration from "../components/Duration.jsx";
 import Intensity from "../components/Intensity.jsx";
+import Score from "../components/Score.jsx";
 
 // Images pour les blocs indicateurs
 import energy from '../assets/energy.svg';
@@ -67,7 +68,7 @@ const Dashboard = () => {
           setUserAverageSessions(durationResponse.data.sessions);
         } else {
           console.error("Données de durée manquantes !");
-        } 
+        }
 
         // récupération data performance
         if (PerformanceResponse?.data?.data) {
@@ -78,7 +79,7 @@ const Dashboard = () => {
 
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
-      } 
+      }
     };
 
     fetchData();
@@ -101,10 +102,11 @@ const Dashboard = () => {
                   {UserAverageSessions ? <Duration data={UserAverageSessions} /> : <p>Chargement de la durée...</p>}
                 </div>
                 <div className="intensity-block">
-                {userPerformance ? <Intensity data={userPerformance} kind={performanceKind} /> : <p>Chargement de l'intensité...</p>}
+                  {userPerformance ? <Intensity data={userPerformance} kind={performanceKind} /> : <p>Chargement de l'intensité...</p>}
                 </div>
-                
-                <div className="score-block"></div>
+                <div className="score-block">
+                  {user ? <Score data={user} /> : <p>Chargement du score...</p>}
+                </div>
               </div>
             </div>
             <div className="indicator-block">

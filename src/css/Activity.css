@@ -1,4 +1,51 @@
-.bar-kilo {
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
+.activity-container {
+    padding: 20px 20px;
+    background-color: #FBFBFB;
+    border-radius: 5px;
+}
+
+.infos-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: #20253A !important;
+}
+
+.legend {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 35%;
+}
+
+.legend-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.texte {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #74798C !important;
+    margin-left: 10px;
+}
+
+.cercle {
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+.gris {
+    color: #282D30 !important;
 }

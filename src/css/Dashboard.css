@@ -28,6 +28,10 @@
     width:80%;
 }
 
+.activity-block {
+    width: 100%;
+}
+
 .dashboard-three-columns {
     display: flex;
     flex-direction: row;
@@ -37,15 +41,15 @@
 }
 
 .duration-block {
-    width: 33%;
+    width: 30%;
 }
 
 .intensity-block {
-    width: 33%;
+    width: 30%;
 }
 
-.scrore-block {
-    width: 33%;
+.score-block {
+    width: 30%;
 }
 
 .indicator-block {

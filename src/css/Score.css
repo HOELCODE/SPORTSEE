@@ -1,0 +1,11 @@
+.score-container {
+    width: 100%;
+    background-color: #FBFBFB;
+    border-radius: 5px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    margin-top: 50px;
+}
