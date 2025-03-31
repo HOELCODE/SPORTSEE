@@ -36,6 +36,18 @@
     width: 100%;
 }
 
+.duration-block {
+    width: 33%;
+}
+
+.intensity-block {
+    width: 33%;
+}
+
+.scrore-block {
+    width: 33%;
+}
+
 .indicator-block {
     display: flex;
     flex-direction: column;

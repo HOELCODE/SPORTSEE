@@ -17,46 +17,53 @@ const Duration = ({ data }) => {
   }));
 
   return (
-    <div className='duration-container'>
+    <div className="duration-container">
       <h2>Durée moyenne des <br /> sessions</h2>
       <div
         style={{
-          backgroundColor: '#FF0000',
-          borderRadius: '5px',
-          marginTop: '30px'
+          backgroundColor: "#FF0000",
+          borderRadius: "5px",
+          marginTop: "30px",
+          width: "80%",  // Permet d'occuper toute la largeur disponible
+ // Évite que le graphique soit trop large
+          height: "250px", // Assure une hauteur fixe
         }}
-        width="300px"
       >
-        <LineChart
-          width={300} // Augmenter la largeur
-          height={200}
-          data={formattedData}
-          margin={{
-            top: 0,
-            right: 5, // Ajout d'une marge à droite
-            left: 5,  // Ajout d'une marge à gauche
-            bottom: 30, // Plus de marge en bas pour éviter le chevauchement
-          }}
-        >
-          <XAxis
-            dataKey="day"
-            tickLine={false}
-            axisLine={false}
-            stroke="#FFF"
-            tick={{ transform: "translate(0, 10)" }}
-            interval={0} // Force l'affichage de tous les ticks
-          />
-          <Tooltip
-            formatter={(value) => [<span style={{ color: '#000' }}>{value} min</span>]} // Formatte la valeur
-            labelFormatter={() => ""} // Supprime l'affichage du jour
-            contentStyle={{ backgroundColor: '#fff' }} // Style du tooltip
-            cursor={{ stroke: "none" }} // Supprime la barre verticale
-            wrapperStyle={{ outline: "none" }} // Supprime les bordures du tooltip
-            position={{ y: 0 }} // Fixe la position du tooltip
-          />
-
-          <Line type="monotone" dataKey="sessionLength" stroke="#FFF" dot={false} strokeWidth={2} />
-        </LineChart>
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            data={formattedData}
+            margin={{
+              top: 0,
+              right: 5,
+              left: 5,
+              bottom: 30,
+            }}
+          >
+            <XAxis
+              dataKey="day"
+              tickLine={false}
+              axisLine={false}
+              stroke="#FFF"
+              tick={{ transform: "translate(0, 20)" }}
+              interval={0}
+            />
+            <Tooltip
+              formatter={(value) => [<span style={{ color: "#000" }}>{value} min</span>]}
+              labelFormatter={() => ""}
+              contentStyle={{ backgroundColor: "#fff" }}
+              cursor={{ stroke: "none" }}
+              wrapperStyle={{ outline: "none" }}
+              position={{ y: 0 }}
+            />
+            <Line
+              type="monotone"
+              dataKey="sessionLength"
+              stroke="#FFF"
+              dot={false}
+              strokeWidth={2}
+            />
+          </LineChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );

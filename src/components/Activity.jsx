@@ -19,7 +19,7 @@ const Activity = ({ data }) => {
 
   // Affichage du graphique
   return (
-    <div style={{ width: "100%", height: 300 }}>
+    <div style={{ width: "100%", height: 300, minWidth: 900 }}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={700}
@@ -36,25 +36,53 @@ const Activity = ({ data }) => {
             tickLine={false}
             axisLine={false}
             dx={15}
-            domain={[0, 'dataMax']}
+            domain={[0, "dataMax"]}
             tickCount={4}
           />
           <Tooltip
             formatter={(value, name) => {
-              if (name === "kilogramBarre") return [<span style={{ color: '#fff' }}>{value * 5}kg</span>];
-              if (name === "caloriesBarre") return [<span style={{ color: '#fff' }}>{value * 8}kcal</span>];
+              if (name === "kilogramBarre")
+                return [
+                  <span style={{ color: "#fff" }}>{value * 5}kg</span>,
+                ];
+              if (name === "caloriesBarre")
+                return [
+                  <span style={{ color: "#fff" }}>{value * 8}kcal</span>,
+                ];
               return value;
             }}
-            labelFormatter={() => ""} // Supprime l'affichage des jours
-            contentStyle={{ backgroundColor: '#E60000', color: '#fff' }} // Style du tooltip
+            labelFormatter={() => ""}
+            contentStyle={{ backgroundColor: "#E60000", color: "#fff" }}
           />
-          <Bar dataKey="kilogramBarre" fill="#282D30" radius={[3, 3, 0, 0]} activeBar={<Rectangle dataKey="kilogramAxe" fill="#282D30" stroke="#C4C4C480" />} />
-          <Bar dataKey="caloriesBarre" fill="#E60000" radius={[3, 3, 0, 0]} activeBar={<Rectangle datakey="CaloriesAxe" fill="#E60000" stroke="#C4C4C480" />} />
+          <Bar
+            dataKey="kilogramBarre"
+            fill="#282D30"
+            radius={[3, 3, 0, 0]}
+            activeBar={
+              <Rectangle
+                dataKey="kilogramAxe"
+                fill="#282D30"
+                stroke="#C4C4C480"
+              />
+            }
+          />
+          <Bar
+            dataKey="caloriesBarre"
+            fill="#E60000"
+            radius={[3, 3, 0, 0]}
+            activeBar={
+              <Rectangle
+                dataKey="caloriesAxe"
+                fill="#E60000"
+                stroke="#C4C4C480"
+              />
+            }
+          />
         </BarChart>
       </ResponsiveContainer>
     </div>
-
   );
+
 };
 
 export default Activity;

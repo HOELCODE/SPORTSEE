@@ -12,21 +12,40 @@ const Intensity = ({ data, kind }) => {
   }));
 
   return (
-    <div className='intensity-container'>
-    <ResponsiveContainer width={350} height={300}>
-      <RadarChart cx="50%" cy="50%" outerRadius="80%" data={formattedData}>
-        <PolarGrid gridType="polygon" radialLines={false} />
-        <PolarAngleAxis dataKey="subject" stroke="#fff" tick={{ fontSize: 12 }} tickLine={false} />
-        <PolarRadiusAxis tick={false} axisLine={false} />
-        <Radar
-          name="Performance"
-          dataKey="value"
-          stroke="#FF0101B2"
-          fill="#FF0101B2"
-          fillOpacity={1}
-        />
-      </RadarChart>
-    </ResponsiveContainer>
+    <div className="intensity-container" style={{ width: "100%", height: "300px" }}>
+      <ResponsiveContainer width="100%" height="85%">
+        <RadarChart width="100%" cx="50%" cy="50%" outerRadius="80%" data={formattedData} height="80%">
+          <PolarGrid gridType="polygon" radialLines={false} />
+          <PolarAngleAxis
+            dataKey="subject"
+            stroke="#fff"
+            tickLine={false}
+            tick={({ payload, x, y, textAnchor }) => {
+              // Exemple : Cibler uniquement le tick "strength"
+              const isTarget = payload.value === "strength";
+              return (
+                <text
+                  x={x}
+                  y={isTarget ? y + 15 : y} // Décale uniquement "strength" vers le bas
+                  textAnchor={textAnchor}
+                  fontSize={12}
+                  fill="#fff"
+                >
+                  {payload.value}
+                </text>
+              );
+            }}
+          />
+          <PolarRadiusAxis tick={false} axisLine={false} />
+          <Radar
+            name="Performance"
+            dataKey="value"
+            stroke="#FF0101B2"
+            fill="#FF0101B2"
+            fillOpacity={1}
+          />
+        </RadarChart>
+      </ResponsiveContainer>
     </div>
   );
 };
