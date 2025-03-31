@@ -13,8 +13,8 @@ const Intensity = ({ data, kind }) => {
 
   return (
     <div className="intensity-container" style={{ width: "100%", height: "300px" }}>
-      <ResponsiveContainer width="100%" height="70%">
-        <RadarChart width="100%" cx="50%" cy="50%" outerRadius="80%" data={formattedData} height="80%">
+      <ResponsiveContainer width="100%" height="100%">
+        <RadarChart width="100%" cx="50%" cy="50%" outerRadius="40%" data={formattedData} height="80%">
           <PolarGrid gridType="polygon" radialLines={false} />
           <PolarAngleAxis
             dataKey="subject"

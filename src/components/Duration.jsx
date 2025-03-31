@@ -23,20 +23,19 @@ const Duration = ({ data }) => {
         style={{
           backgroundColor: "#FF0000",
           borderRadius: "5px",
-          marginTop: "30px",
-          width: "80%",  // Permet d'occuper toute la largeur disponible
- // Évite que le graphique soit trop large
+          width: "100%",  // Permet d'occuper toute la largeur disponible
+          // Évite que le graphique soit trop large
           height: "250px", // Assure une hauteur fixe
         }}
       >
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height={270}>
           <LineChart
             data={formattedData}
             margin={{
-              top: 0,
+              top: 70,
               right: 5,
               left: 5,
-              bottom: 30,
+              bottom: 40,
             }}
           >
             <XAxis
@@ -44,16 +43,32 @@ const Duration = ({ data }) => {
               tickLine={false}
               axisLine={false}
               stroke="#FFF"
-              tick={{ transform: "translate(0, 20)" }}
+              tick={({ payload, x, y, textAnchor }) => {
+                const isL = payload.value === "L";
+                const isD = payload.value === "D";
+
+                return (
+                  <text
+                    x={isL ? x + 5 : isD ? x - 5 : x} // "L" +10px, "D" +5px
+                    y={y}
+                    textAnchor={textAnchor}
+                    fontSize={12}
+                    fill="#fff"
+                  >
+                    <tspan x={isL ? x + 5 : isD ? x - 5 : x} dy="0.71em">{payload.value}</tspan>
+                  </text>
+                );
+              }}
               interval={0}
             />
+
             <Tooltip
               formatter={(value) => [<span style={{ color: "#000" }}>{value} min</span>]}
               labelFormatter={() => ""}
               contentStyle={{ backgroundColor: "#fff" }}
               cursor={{ stroke: "none" }}
               wrapperStyle={{ outline: "none" }}
-              position={{ y: 0 }}
+              position={{ y: 20 }}
             />
             <Line
               type="monotone"
