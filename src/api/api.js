@@ -1,55 +1,30 @@
 const API_URL = "http://localhost:3000"; // URL de l'API
 
-// Fonction pour récupérer les données de l'utilisateur
-export const fetchUserById = async (id) => {
+// Fonction unique pour récupérer toutes les données utilisateur
+export const fetchUserData = async (id) => {
   try {
-    const response = await fetch(`${API_URL}/user/${id}`);
-    if (!response.ok) {
-      throw new Error("Erreur lors de la récupération des données utilisateur");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Erreur API:", error);
-    return null;
-  }
-};
+    const responses = await Promise.all([
+      fetch(`${API_URL}/user/${id}`),
+      fetch(`${API_URL}/user/${id}/activity`),
+      fetch(`${API_URL}/user/${id}/average-sessions`),
+      fetch(`${API_URL}/user/${id}/performance`)
+    ]);
 
-// Fonction pour récupérer les données d'activité de l'utilisateur
-export const fetchUserActivity = async (id) => {
-  try {
-    const response = await fetch(`${API_URL}/user/${id}/activity`);
-    if (!response.ok) {
-      throw new Error("Erreur lors de la récupération des données d'activité");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Erreur API:", error);
-    return null;
-  }
-};
+    const [user, activity, averageSessions, performance] = await Promise.all(responses.map(res => {
+      if (!res.ok) throw new Error("Erreur lors de la récupération des données");
+      return res.json();
+    }));
 
-// Fonction pour récupérer les durées de session de l'utilisateur
-export const fetchUserAverageSessions = async (id) => {
-  try {
-    const response = await fetch(`${API_URL}/user/${id}/average-sessions`);
-    if (!response.ok) {
-      throw new Error("Erreur lors de la récupération des données d'activité");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Erreur API:", error);
-    return null;
-  }
-};
+    return {
+      user: user?.data ?? null,
+      activity: activity?.data?.sessions ?? null,
+      averageSessions: averageSessions?.data?.sessions ?? null,
+      performance: {
+        data: performance?.data?.data ?? null,
+        kind: performance?.data?.kind ?? null
+      }
+    };
 
-// Fonction pour récupérer les performances de l'utilisateur
-export const fetchUserPerformance = async (id) => {
-  try {
-    const response = await fetch(`${API_URL}/user/${id}/performance`);
-    if (!response.ok) {
-      throw new Error("Erreur lors de la récupération des données d'activité");
-    }
-    return await response.json();
   } catch (error) {
     console.error("Erreur API:", error);
     return null;
