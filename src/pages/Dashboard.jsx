@@ -18,6 +18,7 @@ import cheeseburger from '../assets/cheeseburger.svg';
 // css 
 import '../css/Dashboard.css';
 
+// Récupération des données en fonction de l'id dans l'url
 const Dashboard = () => {
   const [data, setData] = useState(null);
   const { id } = useParams();
@@ -34,7 +35,8 @@ const Dashboard = () => {
 
     fetchData();
   }, [id]);
-
+  
+  // Si les data sont null, alors on affiche message d'erreur
   if (!data) {
     return <div className="dashboard"><h1 className="bug-data">Pardonnez nous pour ce petit désagrément, veuillez recharger la page</h1></div>;
   } else {

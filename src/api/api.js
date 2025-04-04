@@ -1,6 +1,7 @@
 const API_URL = "http://localhost:3000"; // URL de l'API
+import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from '../data/data.js'; // DATA Local
 
-// Fonction unique pour récupérer toutes les données utilisateur
+// Fonction pour récupérer toutes les données utilisateur via API
 export const fetchUserData = async (id) => {
   try {
     const responses = await Promise.all([
@@ -31,9 +32,7 @@ export const fetchUserData = async (id) => {
   }
 };
 
-
-import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from '../data/data.js';
-
+// Fonction pour récupérer les données utilisateur via données mockées
 export const getUserDataById = async (id) => {
   const user = USER_MAIN_DATA.find((u) => u.id === id) || null;
   const activity = USER_ACTIVITY.find((a) => a.userId === id)?.sessions || null;
@@ -58,6 +57,7 @@ export const getUserDataById = async (id) => {
 
 const USE_MOCK_DATA = false;
 
+// Fonctione pour récupérer les données utilisateur en fonction de si USER MOCK DATA est activé ou non
 export const getUserData = async (id) => {
   if (USE_MOCK_DATA) {
     console.log("Utilisation des données mockées");
