@@ -36,7 +36,7 @@ const Dashboard = () => {
   }, [id]);
 
   if (!data) {
-    return <h1>Pardonnez nous pour ce petit désagrément, veuillez recharger la page</h1>;
+    return <div className="dashboard"><h1 className="bug-data">Pardonnez nous pour ce petit désagrément, veuillez recharger la page</h1></div>;
   } else {
     return (
       <div className="dashboard">

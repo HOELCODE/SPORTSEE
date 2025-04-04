@@ -9,6 +9,10 @@
     color: #000;
 }
 
+.bug-data {
+    text-align: #FF0101;
+}
+
 .dashboard span {
     color: #FF0101;
 }
