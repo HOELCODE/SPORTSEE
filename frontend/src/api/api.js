@@ -55,7 +55,7 @@ export const getUserDataById = async (id) => {
 };
 
 
-const USE_MOCK_DATA = false;
+const USE_MOCK_DATA = true;
 
 // Fonctione pour récupérer les données utilisateur en fonction de si USER MOCK DATA est activé ou non
 export const getUserData = async (id) => {
